@@ -1,5 +1,7 @@
 package com.backendfarmacia.backendfarmacia.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +24,7 @@ public class ProdutoModel {
 	private String nome;
 	
 	@NotNull
-	private long preco;
+	private BigDecimal preco;
 	
 	private String descricao;
 	
@@ -46,11 +48,11 @@ public class ProdutoModel {
 		this.nome = nome;
 	}
 
-	public long getPreco() {
+	public @NotNull BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(long preco) {
+	public void setPreco(@NotNull BigDecimal preco) {
 		this.preco = preco;
 	}
 

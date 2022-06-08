@@ -1,5 +1,6 @@
 package com.backendfarmacia.backendfarmacia.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backendfarmacia.backendfarmacia.model.ProdutoModel;
@@ -51,6 +53,12 @@ public class ProdutosController {
 	public void delete(@PathVariable long id) {
 		repository.deleteById(id);
 	}
-	
-	
+	@GetMapping("/menorque")
+	public ResponseEntity<List<ProdutoModel>> getMenorrQue(@RequestParam BigDecimal preco){
+		return new ResponseEntity<List<ProdutoModel>>(repository.findByPrecoLessThanEqual(preco), HttpStatus.OK);
+	}
+	@GetMapping("/maiorque")
+	public ResponseEntity<List<ProdutoModel>> getMaiorQue(@RequestParam BigDecimal preco){
+		return new ResponseEntity<List<ProdutoModel>>(repository.findByPrecoGreaterThanEqual(preco), HttpStatus.OK);
+	}
 }
